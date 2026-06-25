@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Bengkel Theo')</title>
+    <title>@yield('title', 'Bengkel Theo - Admin')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
-<body>
+<body class="admin-theme">
     @auth
         @php
             $userNotification = auth()->user()->role === 'user'
@@ -29,12 +30,9 @@
                 <nav class="side-menu">
                     @if (auth()->user()->role === 'admin')
                         <a class="side-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">DASHBOARD</a>
-                    @endif
-                    <a class="side-link {{ request()->routeIs('sparepart.stok') ? 'active' : '' }}" href="{{ route('sparepart.stok') }}">Stok Sparepart</a>
-                    @if (auth()->user()->role === 'admin')
                         <a class="side-link {{ request()->routeIs('booking.index') ? 'active' : '' }}" href="{{ route('booking.index') }}">Booking User</a>
-                        <a class="side-link {{ request()->routeIs('booking.histori') ? 'active' : '' }}" href="{{ route('booking.histori') }}">Histori Servis</a>
-                        <a class="side-link {{ request()->routeIs('sparepart.*') && ! request()->routeIs('sparepart.stok') ? 'active' : '' }}" href="{{ route('sparepart.index') }}">Penjualan Sparepart</a>
+                        <a class="side-link {{ request()->routeIs('pelanggan.index') ? 'active' : '' }}" href="{{ route('pelanggan.index') }}">Data Pelanggan</a>
+                        <a class="side-link {{ request()->routeIs('laporan.index') ? 'active' : '' }}" href="{{ route('laporan.index') }}">Laporan Keuangan</a>
                     @else
                         <a class="side-link {{ request()->routeIs('booking.create') ? 'active' : '' }}" href="{{ route('booking.create') }}">Booking Online</a>
                         <a class="side-link {{ request()->routeIs('booking.saya') || request()->routeIs('booking.edit-online') ? 'active' : '' }}" href="{{ route('booking.saya') }}">Bookingan Saya</a>

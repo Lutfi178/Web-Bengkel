@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Edit Penjualan Sparepart - Bengkel Theo')
 @section('page-heading', 'Edit Penjualan Sparepart')

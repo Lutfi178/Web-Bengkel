@@ -1,9 +1,15 @@
-@extends('layouts.app')
+@extends(auth()->check() && auth()->user()->role === 'admin' ? 'layouts.admin' : 'layouts.user')
 
 @section('title', 'Stok Sparepart - Bengkel Theo')
 @section('page-heading', 'Stok Sparepart')
 
 @section('content')
+    @if(auth()->check() && auth()->user()->role === 'admin')
+        <div class="d-flex justify-content-end mb-3">
+            <a class="btn btn-primary" href="{{ route('sparepart.create') }}">+ Tambah Stok</a>
+        </div>
+    @endif
+
     <form class="catalog-search" action="{{ route('sparepart.stok') }}" method="GET">
         <div>
             <label for="q">Cari Sparepart</label>
@@ -43,6 +49,32 @@
                         <strong>{{ number_format($sparepart->stok) }}</strong>
                     </div>
                 </div>
+
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <div class="p-3 border-top bg-light d-flex gap-2 flex-wrap justify-content-end">
+                        <button
+                            class="btn btn-warning btn-sm flex-grow-1"
+                            type="button"
+                            data-confirm-action="{{ route('sparepart.beli', $sparepart->id) }}"
+                            data-confirm-message="Proses pembelian dan cetak nota produk ini?"
+                            data-confirm-button="Ya, Proses"
+                            data-confirm-button-class="btn btn-warning"
+                            {{ $sparepart->stok < 1 ? 'disabled' : '' }}>
+                            Beli & Nota
+                        </button>
+                        <a class="btn btn-secondary btn-sm" href="{{ route('sparepart.edit', $sparepart->id) }}">Edit</a>
+                        <button
+                            class="btn btn-danger btn-sm"
+                            type="button"
+                            data-confirm-action="{{ route('sparepart.delete', $sparepart->id) }}"
+                            data-confirm-method="DELETE"
+                            data-confirm-message="Hapus produk sparepart ini?"
+                            data-confirm-button="Ya, Hapus"
+                            data-confirm-button-class="btn btn-danger">
+                            Hapus
+                        </button>
+                    </div>
+                @endif
             </article>
         @empty
             <div class="content-card empty-state">

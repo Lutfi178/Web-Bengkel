@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Tambah Penjualan Sparepart - Bengkel Theo')
 @section('page-heading', 'Tambah Penjualan Sparepart')

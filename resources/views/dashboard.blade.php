@@ -1,154 +1,125 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Dashboard - Bengkel Theo')
-@section('page-heading', 'Dashboard')
 
 @section('content')
-    <section class="operation-card">
+    <div class="admin-page-header">
         <div>
-            <span class="eyebrow">Jam Operasional</span>
-            <h2>SENIN - SABTU </h2>
+            <h1 class="admin-page-title">Dashboard Overview</h1>
         </div>
-        <strong>08.00 - 17.00</strong>
-    </section>
-
-    <div class="stats-grid">
-        <div class="stat-card">
-            <span>Total Penjualan</span>
-            <strong>{{ number_format($totalSparepart) }}</strong>
-        </div>
-        <div class="stat-card">
-            <span>Total Booking Servis</span>
-            <strong>{{ number_format($totalBookingServis) }}</strong>
-        </div>
-        <div class="stat-card">
-            <span>Pendapatan Sparepart</span>
-            <strong>Rp {{ number_format($totalPendapatanSparepart, 0, ',', '.') }}</strong>
-        </div>
-        <div class="stat-card">
-            <span>Transaksi Hari Ini</span>
-            <strong>{{ number_format($totalTransaksiHariIni) }}</strong>
-        </div>
-        <div class="stat-card">
-            <span>Pendapatan Bulan Ini</span>
-            <strong>Rp {{ number_format($totalPendapatanBulanIni, 0, ',', '.') }}</strong>
-        </div>
-        <div class="stat-card">
-            <span>Booking Belum Dibayar</span>
-            <strong>{{ number_format($bookingBelumDibayar) }}</strong>
+        <div class="admin-badge neutral" style="font-size: 14px; padding: 10px 18px;">
+            <svg style="margin-right:8px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            JAM OPERASIONAL: 08.00 - 17.00
         </div>
     </div>
 
-    <div class="dashboard-insight-grid">
-        <section class="content-card">
-            <div class="section-heading">
-                <div>
-                    <span class="eyebrow">Ringkasan</span>
-                    <h2>Sparepart Paling Laris</h2>
-                </div>
-            </div>
+    <div class="admin-metrics-grid">
+        <div class="admin-metric-card">
+            <span class="metric-label">Penjualan Sparepart</span>
+            <p class="metric-value">{{ number_format($totalSparepart) }}</p>
+        </div>
+        <div class="admin-metric-card success">
+            <span class="metric-label">Total Booking Servis</span>
+            <p class="metric-value">{{ number_format($totalBookingServis) }}</p>
+        </div>
+        <div class="admin-metric-card">
+            <span class="metric-label">Pendapatan Sparepart</span>
+            <p class="metric-value">Rp {{ number_format($totalPendapatanSparepart, 0, ',', '.') }}</p>
+        </div>
+        <div class="admin-metric-card warning">
+            <span class="metric-label">Booking Belum Bayar</span>
+            <p class="metric-value">{{ number_format($bookingBelumDibayar) }}</p>
+        </div>
+    </div>
 
-            <div class="insight-list">
+    <div class="admin-grid-2">
+        <div class="admin-panel">
+            <div class="admin-panel-header">
+                <h3 class="admin-panel-title">Sparepart Paling Laris</h3>
+            </div>
+            <div class="admin-list-group">
                 @forelse ($sparepartPalingLaris as $sparepart)
-                    <div class="insight-row">
+                    <div class="admin-list-item">
                         <div>
-                            <strong>{{ $sparepart->nama_sparepart }}</strong>
-                            <span>{{ $sparepart->kode_sparepart }}</span>
+                            <div class="admin-list-item-title">{{ $sparepart->nama_sparepart }}</div>
+                            <div class="admin-list-item-sub">{{ $sparepart->kode_sparepart }}</div>
                         </div>
-                        <div class="insight-value">
-                            <strong>{{ number_format($sparepart->jumlah_terjual) }} terjual</strong>
-                            <span>Rp {{ number_format($sparepart->total_pendapatan, 0, ',', '.') }}</span>
+                        <div class="admin-list-item-value">
+                            <strong>{{ number_format($sparepart->jumlah_terjual) }} unit</strong>
+                            <div class="admin-list-item-sub">Rp {{ number_format($sparepart->total_pendapatan, 0, ',', '.') }}</div>
                         </div>
                     </div>
                 @empty
-                    <div class="empty-mini">Belum ada transaksi sparepart.</div>
+                    <div class="text-center py-4 text-muted">Belum ada transaksi.</div>
                 @endforelse
             </div>
-        </section>
+        </div>
 
-        <section class="content-card">
-            <div class="section-heading">
-                <div>
-                    <span class="eyebrow">Peringatan</span>
-                    <h2>Stok Hampir Habis</h2>
-                </div>
-                <a class="btn btn-light btn-sm" href="{{ route('sparepart.index') }}">Kelola Stok</a>
+        <div class="admin-panel">
+            <div class="admin-panel-header">
+                <h3 class="admin-panel-title text-danger">Peringatan Stok Tipis</h3>
+                <a class="admin-btn admin-btn-secondary" href="{{ route('sparepart.index') }}">Kelola</a>
             </div>
-
-            <div class="insight-list">
+            <div class="admin-list-group">
                 @forelse ($stokHampirHabis as $sparepart)
-                    <div class="insight-row">
+                    <div class="admin-list-item">
                         <div>
-                            <strong>{{ $sparepart->nama_sparepart }}</strong>
-                            <span>{{ $sparepart->kode_sparepart }}</span>
+                            <div class="admin-list-item-title">{{ $sparepart->nama_sparepart }}</div>
+                            <div class="admin-list-item-sub">{{ $sparepart->kode_sparepart }}</div>
                         </div>
-                        <div class="stock-warning">
-                            {{ number_format($sparepart->stok) }} tersisa
+                        <div>
+                            <span class="admin-badge warning">{{ number_format($sparepart->stok) }} tersisa</span>
                         </div>
                     </div>
                 @empty
-                    <div class="empty-mini">Tidak ada stok yang hampir habis.</div>
+                    <div class="text-center py-4 text-muted">Stok aman.</div>
                 @endforelse
             </div>
-        </section>
+        </div>
     </div>
 
-    <div class="chart-grid">
-        <section class="content-card chart-card">
-            <div class="section-heading">
-                <div>
-                    <span class="eyebrow">Grafik </span>
-                    <h2>Penjualan Sparepart {{ $tahunGrafik }}</h2>
-                </div>
+    <!-- Keep the charts using basic HTML for now, stacked vertically -->
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div class="admin-panel">
+            <div class="admin-panel-header">
+                <h3 class="admin-panel-title">Grafik Penjualan {{ $tahunGrafik }}</h3>
                 <strong>Rp {{ number_format($grafikPenjualan->sum('total'), 0, ',', '.') }}</strong>
             </div>
-
-            <div class="bar-chart">
+            <div class="bar-chart mt-4">
                 @foreach ($grafikPenjualan as $data)
                     @php
                         $tinggi = $data['total'] > 0 ? max(($data['total'] / $nilaiTertinggiPenjualan) * 100, 8) : 0;
                     @endphp
                     <div class="bar-item">
                         <div class="bar-track">
-                            <div class="bar-fill" style="height: {{ $tinggi }}%">
-                                @if ($data['total'] > 0)
-                                    <span>Rp {{ number_format($data['total'], 0, ',', '.') }}</span>
-                                @endif
+                            <div class="bar-fill" style="height: {{ $tinggi }}%; background:#2563eb;">
                             </div>
                         </div>
                         <strong>{{ $data['bulan'] }}</strong>
                     </div>
                 @endforeach
             </div>
-        </section>
+        </div>
 
-        <section class="content-card chart-card">
-            <div class="section-heading">
-                <div>
-                    <span class="eyebrow">Grafik </span>
-                    <h2>Servis Per Bulan {{ $tahunGrafik }}</h2>
-                </div>
+        <div class="admin-panel">
+            <div class="admin-panel-header">
+                <h3 class="admin-panel-title">Grafik Servis {{ $tahunGrafik }}</h3>
                 <strong>{{ number_format($grafikServis->sum('total')) }} Booking</strong>
             </div>
-
-            <div class="bar-chart">
+            <div class="bar-chart mt-4">
                 @foreach ($grafikServis as $data)
                     @php
                         $tinggi = $data['total'] > 0 ? max(($data['total'] / $nilaiTertinggiServis) * 100, 8) : 0;
                     @endphp
                     <div class="bar-item">
                         <div class="bar-track">
-                            <div class="bar-fill bar-fill-service" style="height: {{ $tinggi }}%">
-                                @if ($data['total'] > 0)
-                                    <span>{{ number_format($data['total']) }}</span>
-                                @endif
+                            <div class="bar-fill" style="height: {{ $tinggi }}%; background:#10b981;">
                             </div>
                         </div>
                         <strong>{{ $data['bulan'] }}</strong>
                     </div>
                 @endforeach
             </div>
-        </section>
+        </div>
     </div>
-
 @endsection

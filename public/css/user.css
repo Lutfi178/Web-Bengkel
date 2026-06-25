@@ -1,0 +1,131 @@
+/* User Portal Styles */
+body.user-theme {
+    background-color: #f8fafc;
+}
+
+.user-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.user-navbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 40px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.user-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+}
+
+.user-nav-brand img {
+    height: 48px;
+    background: #020617;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.user-nav-brand span {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-nav-brand strong {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.user-nav-brand small {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.user-nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.user-nav-link {
+    font-weight: 700;
+    color: var(--muted);
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.user-nav-link:hover, .user-nav-link.active {
+    background: #f1f5f9;
+    color: var(--primary-dark);
+}
+
+.user-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.user-main {
+    flex: 1;
+    padding: 40px 20px;
+    animation: fade-pop 0.3s ease both;
+    position: relative;
+}
+
+.user-main::before {
+    content: "";
+    position: absolute;
+    top: -250px;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.user-main .container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.user-profile-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ecfdf5;
+    border: 1px solid #99f6e4;
+    border-radius: 999px;
+    padding: 6px 14px;
+    color: var(--primary-dark);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.btn-logout {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: 700;
+    color: var(--danger);
+    transition: all 0.2s;
+}
+
+.btn-logout:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}

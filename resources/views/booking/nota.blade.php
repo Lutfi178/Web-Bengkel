@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Nota Booking Servis - Bengkel Theo')
 @section('page-heading', 'Nota Booking Servis')

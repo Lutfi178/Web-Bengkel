@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('title', 'Booking Online - Bengkel Theo')
 @section('page-heading', 'Booking Online')

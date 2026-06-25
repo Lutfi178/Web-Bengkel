@@ -27,13 +27,13 @@ class DashboardController extends Controller
             12 => 'Des',
         ];
 
-        $penjualanPerBulan = RiwayatPenjualanSparepart::selectRaw('MONTH(created_at) as bulan, SUM(total) as total')
-            ->whereYear('created_at', $tahunIni)
+        $penjualanPerBulan = RiwayatPenjualanSparepart::selectRaw("MONTH(created_at) as bulan, SUM(total) as total")
+            ->whereRaw("YEAR(created_at) = ?", [$tahunIni])
             ->groupBy('bulan')
             ->pluck('total', 'bulan');
 
-        $servisPerBulan = Booking::selectRaw('MONTH(created_at) as bulan, COUNT(*) as total')
-            ->whereYear('created_at', $tahunIni)
+        $servisPerBulan = Booking::selectRaw("MONTH(created_at) as bulan, COUNT(*) as total")
+            ->whereRaw("YEAR(created_at) = ?", [$tahunIni])
             ->groupBy('bulan')
             ->pluck('total', 'bulan');
 

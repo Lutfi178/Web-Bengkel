@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Nota Pembelian Sparepart - Bengkel Theo')
 @section('page-heading', 'Nota Pembelian')

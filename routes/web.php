@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanSparepartController;
 use App\Http\Controllers\SparepartController;
 use App\Http\Controllers\UserNotificationController;
@@ -45,5 +47,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/sparepart/edit/{id}', [PenjualanSparepartController::class, 'edit'])->name('sparepart.edit');
         Route::put('/sparepart/update/{id}', [PenjualanSparepartController::class, 'update'])->name('sparepart.update');
         Route::delete('/sparepart/delete/{id}', [PenjualanSparepartController::class, 'destroy'])->name('sparepart.delete');
+        
+        Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
+        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
     });
 });

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Bayar Booking - Bengkel Theo')
 @section('page-heading', 'Bayar Booking')
