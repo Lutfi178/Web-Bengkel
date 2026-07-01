@@ -6,8 +6,12 @@
     <div class="card border-0 shadow-lg mx-auto" style="max-width: 460px; width: 100%;">
         <div class="card-body p-4 p-md-5">
             <div class="text-center mb-4">
-                <img class="auth-logo mx-auto mb-3" src="{{ asset('images/logo-bengkel-theo.png') }}" alt="Bengkel Theo">
-                <h1 class="h3 fw-bold mb-1">Login </h1>
+                <div class="bt-logo mb-3">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <h1 class="h3 fw-bold mb-1">Login</h1>
                 <p class="text-muted mb-0">Masuk untuk melihat stok dan penjualan sparepart.</p>
             </div>
 

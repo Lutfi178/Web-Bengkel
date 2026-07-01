@@ -59,13 +59,120 @@ input {
 
 .auth-page {
     align-items: center;
-    background:
-        linear-gradient(135deg, rgba(17, 24, 39, 0.88), rgba(15, 118, 110, 0.86)),
-        url("https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1400&q=80") center/cover;
+    background: linear-gradient(135deg, #0b2521 0%, #084c43 45%, #0d7f72 100%);
     display: flex;
     min-height: 100vh;
     justify-content: center;
     padding: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-page::before {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: 30%;
+    left: -25%;
+    background: radial-gradient(ellipse at 50% 100%, rgba(13, 138, 124, 0.25) 0%, rgba(9, 79, 70, 0.15) 50%, transparent 80%);
+    border-radius: 40% 45% 0 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.auth-page::after {
+    content: "";
+    position: absolute;
+    width: 180%;
+    height: 150%;
+    bottom: -100%;
+    left: -40%;
+    background: radial-gradient(ellipse at 50% 100%, rgba(245, 158, 11, 0.08) 0%, rgba(13, 138, 124, 0.1) 40%, transparent 70%);
+    border-radius: 45% 40% 0 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Custom CSS Logo */
+.bt-logo {
+    width: 76px;
+    height: 76px;
+    background: #0f172a; /* Dark navy slate */
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 8px 16px rgba(15, 23, 42, 0.2);
+}
+
+.bt-logo span {
+    display: block;
+    height: 5px;
+    background: #f59e0b; /* Bright golden yellow */
+    border-radius: 999px;
+}
+
+.bt-logo span:nth-child(1) {
+    width: 26px;
+}
+
+.bt-logo span:nth-child(2) {
+    width: 38px;
+}
+
+.bt-logo span:nth-child(3) {
+    width: 26px;
+}
+
+/* Card overrides for login/register */
+.auth-page .card {
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25) !important;
+    z-index: 2; /* Make sure it's above the background decorations */
+    background: #ffffff !important;
+}
+
+.auth-page .form-control {
+    border-radius: 10px !important;
+    border: 1px solid #d9e1ec !important;
+    padding: 12px 16px !important;
+    font-size: 15px !important;
+    color: #1e293b !important;
+    background: #fdfdfd !important;
+    transition: all 0.2s ease !important;
+}
+
+.auth-page .form-control:focus {
+    border-color: #0d8a7c !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 4px rgba(13, 138, 124, 0.15) !important;
+}
+
+.auth-page .btn-primary {
+    background: #0d8a7c !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 12px 20px !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    color: #ffffff !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 12px rgba(13, 138, 124, 0.25) !important;
+}
+
+.auth-page .btn-primary:hover {
+    background: #0b7569 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(13, 138, 124, 0.35) !important;
+}
+
+.auth-page .btn-primary:active {
+    transform: translateY(0) !important;
 }
 
 .login-card {

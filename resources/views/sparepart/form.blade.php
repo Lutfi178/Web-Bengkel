@@ -24,7 +24,7 @@
 
 <div class="form-group">
     <label for="kode_sparepart">Kode Sparepart</label>
-    <input class="form-control" id="kode_sparepart" type="text" name="kode_sparepart" value="{{ old('kode_sparepart', $sparepart->kode_sparepart ?? '') }}" required>
+    <input class="form-control" id="kode_sparepart" type="text" name="kode_sparepart" value="{{ old('kode_sparepart', $sparepart->kode_sparepart ?? $randomCode ?? '') }}" required {{ isset($sparepart) ? '' : 'readonly' }}>
     @error('kode_sparepart')
         <div class="error">{{ $message }}</div>
     @enderror

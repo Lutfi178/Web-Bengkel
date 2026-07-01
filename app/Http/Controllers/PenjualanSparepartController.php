@@ -31,7 +31,11 @@ class PenjualanSparepartController extends Controller
 
     public function create(): View
     {
-        return view('sparepart.create');
+        $randomCode = 'SPP-' . rand(1000, 9999);
+        while (PenjualanSparepart::where('kode_sparepart', $randomCode)->exists()) {
+            $randomCode = 'SPP-' . rand(1000, 9999);
+        }
+        return view('sparepart.create', compact('randomCode'));
     }
 
     public function store(Request $request): RedirectResponse

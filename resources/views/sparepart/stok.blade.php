@@ -23,14 +23,41 @@
 
     <div class="stock-catalog-grid">
         @forelse ($spareparts as $sparepart)
+            @php
+                $styleIndex = ($loop->index % 4) + 1;
+            @endphp
             <article class="stock-product-card">
                 <div class="stock-product-image">
                     @if ($sparepart->gambar_sparepart)
                         <img src="{{ asset('storage/' . $sparepart->gambar_sparepart) }}" alt="{{ $sparepart->nama_sparepart }}">
                     @else
-                        <div class="stock-product-placeholder">
-                            <span>BT</span>
-                            <small>Sparepart</small>
+                        <div class="placeholder-container placeholder-style-{{ $styleIndex }}">
+                            @if ($styleIndex == 1)
+                                <!-- Purple circle with arc line -->
+                                <svg class="placeholder-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="30" fill="#b197fc" />
+                                    <path d="M20 70C20 70 40 30 80 50" stroke="#7048e8" stroke-width="6" stroke-linecap="round" />
+                                </svg>
+                            @elseif ($styleIndex == 2)
+                                <!-- Yellow with crossed lines -->
+                                <svg class="placeholder-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="30" y1="40" x2="70" y2="40" stroke="#868e96" stroke-width="6" stroke-linecap="round" />
+                                    <line x1="30" y1="60" x2="70" y2="60" stroke="#868e96" stroke-width="6" stroke-linecap="round" />
+                                    <line x1="25" y1="70" x2="75" y2="30" stroke="#868e96" stroke-width="6" stroke-linecap="round" />
+                                </svg>
+                            @elseif ($styleIndex == 3)
+                                <!-- Light blue with dark ring -->
+                                <svg class="placeholder-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="24" stroke="#1e293b" stroke-width="8" />
+                                </svg>
+                            @else
+                                <!-- Light pink with concentric circles -->
+                                <svg class="placeholder-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="28" stroke="#da77f2" stroke-width="5" />
+                                    <circle cx="50" cy="50" r="18" stroke="#ff8787" stroke-width="5" />
+                                    <circle cx="50" cy="50" r="8" fill="#da77f2" />
+                                </svg>
+                            @endif
                         </div>
                     @endif
 
@@ -43,11 +70,6 @@
                     <div class="product-code">{{ $sparepart->kode_sparepart }}</div>
                     <h2>{{ $sparepart->nama_sparepart }}</h2>
                     <div class="product-price">Rp {{ number_format($sparepart->harga, 0, ',', '.') }}</div>
-
-                    <div class="stock-product-meta">
-                        <span>Stok</span>
-                        <strong>{{ number_format($sparepart->stok) }}</strong>
-                    </div>
                 </div>
 
                 @if(auth()->check() && auth()->user()->role === 'admin')

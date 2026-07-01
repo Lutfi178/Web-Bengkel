@@ -19,18 +19,23 @@
         <div class="app-shell">
             <aside class="sidebar">
                 <a class="brand" href="{{ auth()->user()->role === 'admin' ? route('dashboard') : route('sparepart.stok') }}">
-                    <img class="brand-logo" src="{{ asset('images/logo-bengkel-theo.png') }}" alt="Bengkel Theo">
+                    <div class="brand-logo-css">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                     <span>
                         <strong>Bengkel Theo</strong>
                         <small>Motor Service</small>
-                        <small class="brand-address">Jl. Moh. Yamin No.67, Jayengan, Kec. Serengan, Kota Surakarta, Jawa Tengah 57153</small>
                     </span>
                 </a>
 
                 <nav class="side-menu">
                     @if (auth()->user()->role === 'admin')
-                        <a class="side-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">DASHBOARD</a>
-                        <a class="side-link {{ request()->routeIs('booking.index') ? 'active' : '' }}" href="{{ route('booking.index') }}">Booking User</a>
+                        <a class="side-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Dashboard</a>
+                        <a class="side-link {{ request()->routeIs('sparepart.stok') ? 'active' : '' }}" href="{{ route('sparepart.stok') }}">Stok Sparepart</a>
+                        <a class="side-link {{ request()->routeIs('booking.index') || request()->routeIs('booking.histori') || request()->routeIs('booking.bayar') || request()->routeIs('booking.nota') ? 'active' : '' }}" href="{{ route('booking.index') }}">Booking User</a>
+                        <a class="side-link {{ request()->routeIs('sparepart.index') || request()->routeIs('sparepart.create') || request()->routeIs('sparepart.edit') || request()->routeIs('sparepart.nota') ? 'active' : '' }}" href="{{ route('sparepart.index') }}">Penjualan Sparepart</a>
                         <a class="side-link {{ request()->routeIs('pelanggan.index') ? 'active' : '' }}" href="{{ route('pelanggan.index') }}">Data Pelanggan</a>
                         <a class="side-link {{ request()->routeIs('laporan.index') ? 'active' : '' }}" href="{{ route('laporan.index') }}">Laporan Keuangan</a>
                     @else
@@ -55,9 +60,9 @@
                             <h2>@yield('page-heading', 'Bengkel Theo')</h2>
                         </div>
                     </div>
-                    <div class="topbar-actions">
-                        <span class="role-chip">{{ auth()->user()->role === 'admin' ? 'Admin' : 'User' }}</span>
-                        <div class="user-chip">{{ auth()->user()->email }}</div>
+                    <div class="topbar-actions d-flex gap-2 align-items-center">
+                        <span class="role-badge">{{ auth()->user()->role === 'admin' ? 'Admin' : 'User' }}</span>
+                        <span class="online-badge">Online</span>
                     </div>
                 </header>
     @endauth
